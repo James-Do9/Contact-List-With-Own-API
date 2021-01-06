@@ -11,7 +11,8 @@ export const AddContact = () => {
 		address: ""
 	});
 	const handleChange = e => {
-		setContact({ ...contact, [e.target.name]: e.target.value });
+        setContact({ ...contact, [e.target.name]: e.target.value }); //[e.target.name] changes to the name of the state and it is changed with the values at the state
+        //the use of the name attribute is important in the input fields in order for this to work along with the value.
 	};
 	return (
 		<div className="container">

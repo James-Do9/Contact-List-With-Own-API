@@ -53,7 +53,6 @@ export const ContactCard = props => {
 
 ContactCard.propTypes = {
 	history: PropTypes.object,
-	//onDelete: PropTypes.func,
 	propContact: PropTypes.object,
 	id: PropTypes.string
 };
