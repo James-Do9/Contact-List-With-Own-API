@@ -2,23 +2,38 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GlobalState } from "../store/appContext";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export const EditContact = () => {
+export const EditContact = props => {
 	const { store, actions } = useContext(GlobalState);
-	const [contact, setContact] = useState({});
+	const info = store.agenda.find(element => element.id == props.match.params.id);
+	console.log(info);
+	const [contact, setContact] = useState({
+		name: info ? info.full_name : null,
+		email: info ? info.email : null,
+		phone: info ? info.phone : null,
+		address: info ? info.address : null,
+		id: info ? info.id : null
+	});
+
+	const handleChange = e => {
+		setContact({ ...contact, [e.target.name]: e.target.value });
+	};
+
 	return (
 		<div className="container">
 			<div>
-				<h1 className="text-center mt-5">Edit Current contact</h1>
+				<h1 className="text-center mt-5">Edit Contact</h1>
 				<form>
 					<div className="form-group">
 						<label>Full Name</label>
 						<input
 							type="text"
 							className="form-control"
-							onChange={e => setContact(e.target.value)}
-							value={contact.full_name}
+							onChange={handleChange}
+							value={contact.name}
 							placeholder="Full Name"
+							name="name"
 						/>
 					</div>
 					<div className="form-group">
@@ -26,9 +41,10 @@ export const EditContact = () => {
 						<input
 							type="email"
 							className="form-control"
-							onChange={e => setContact(e.target.value)}
+							onChange={handleChange}
 							value={contact.email}
 							placeholder="Enter email"
+							name="email"
 						/>
 					</div>
 					<div className="form-group">
@@ -36,9 +52,10 @@ export const EditContact = () => {
 						<input
 							type="phone"
 							className="form-control"
-							onChange={e => setContact(e.target.value)}
+							onChange={handleChange}
 							value={contact.phone}
 							placeholder="Enter phone"
+							name="phone"
 						/>
 					</div>
 					<div className="form-group">
@@ -46,12 +63,18 @@ export const EditContact = () => {
 						<input
 							type="text"
 							className="form-control"
-							onChange={e => setContact(e.target.value)}
+							onChange={handleChange}
 							value={contact.address}
 							placeholder="Enter address"
+							name="address"
 						/>
 					</div>
-					<button type="button" className="btn btn-primary form-control">
+					<button
+						type="button"
+						className="btn btn-primary form-control"
+						onClick={() =>
+							actions.saveContact(contact.name, contact.address, contact.email, contact.phone, contact.id)
+						}>
 						Save
 					</button>
 					<Link className="mt-3 w-100 text-center" to="/">
@@ -62,7 +85,9 @@ export const EditContact = () => {
 		</div>
 	);
 };
-
+EditContact.propTypes = {
+	match: PropTypes.object
+};
 /*{
 	store.agenda
 		? store.agenda.map((contact, index) => {
@@ -70,3 +95,4 @@ export const EditContact = () => {
 		  })
 		: null;
 }*/
+//Look up spreading later on

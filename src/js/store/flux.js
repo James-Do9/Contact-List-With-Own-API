@@ -4,8 +4,6 @@ const getState = ({ getStore, setStore }) => {
 			agenda: null
 		},
 		actions: {
-			//(Arrow) Functions that update the Store
-			// Remember to use the scope: scope.state.store & scope.setState()
 			loadInitialData: () => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James")
 					.then(function(response) {
@@ -20,66 +18,109 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 
-			addContact: (fullname, address, email, phone, id) => {
-				let store = getStore();
-				if (agenda) {
-					var updatedAgenda = store.agenda.concat({
-						id: id,
+			addContact: (fullname, address, email, phone) => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+					method: "POST", // or 'POST'
+					body: JSON.stringify({
+						agenda_slug: "James",
 						full_name: fullname,
 						email: email,
 						phone: phone,
 						address: address
-					});
-					setStore({ agenda: updatedAgenda });
-					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James", {
-						method: "PUT", // or 'POST'
-						body: JSON.stringify(updatedAgenda), // data can be `string` or {object}!
-						headers: {
-							"Content-Type": "application/json"
+					}), // data can be `string` or {object}!
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(respose.statusText);
 						}
+						return response.json();
 					})
-						.then(res => res.json())
-						.then(response => console.log("Success:", JSON.stringify(response)))
-						.catch(error => console.error("Error:", error));
-				}
+					.then(jsonifiedResponse => {
+						console.log(jsonifiedResponse);
+						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James")
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								return response.json();
+							})
+							.then(jsonifiedResponse => setStore({ agenda: jsonifiedResponse }))
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
 			},
 
-			onDelete: index => {
-				let store = getStore();
-				let updatedAgenda = store.agenda;
-				updatedAgenda.splice(index, 1);
-				setStore({ agenda: updatedAgenda });
-				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James", {
-					method: "PUT", // or 'POST'
-					body: JSON.stringify(updatedAgenda), // data can be `string` or {object}!
+			onDelete: name => {
+				fetch(`https://assets.breatheco.de/apis/fake/contact/${name}`, {
+					method: "DELETE", // or 'POST'
 					headers: {
 						"Content-Type": "application/json"
 					}
 				})
-					.then(res => res.json())
-					.then(response => console.log("Success:", JSON.stringify(response)))
-					.catch(error => console.error("Error:", error));
-			}
+					.then(jsonifiedResponse => {
+						console.log(jsonifiedResponse);
+						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James")
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								return response.json();
+							})
+							.then(jsonifiedResponse => setStore({ agenda: jsonifiedResponse }))
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
 
-			/*saveContact: ind => {
-				let store = getStore();
-				const updatedAgenda = store.agenda.map((contact, index) => {
-					if (index == ind) {
-						return contact;
-					}
-				});
-				setStore({ agenda: updatedAgenda });
-				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James", {
+			saveContact: (name, address, email, phone, id) => {
+				fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
 					method: "PUT", // or 'POST'
-					body: JSON.stringify(updatedAgenda), // data can be `string` or {object}!
+					body: JSON.stringify({
+						agenda_slug: "James",
+						full_name: name,
+						email: email,
+						address: address,
+						phone: phone
+					}), // data can be `string` or {object}!
 					headers: {
 						"Content-Type": "application/json"
 					}
 				})
-					.then(res => res.json())
-					.then(response => console.log("Success:", JSON.stringify(response)))
-					.catch(error => console.error("Error:", error));
-			}*/
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(respose.statusText);
+						}
+						return response.json();
+					})
+					.then(jsonifiedResponse => {
+						console.log(jsonifiedResponse);
+						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James")
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								return response.json();
+							})
+							.then(jsonifiedResponse => setStore({ agenda: jsonifiedResponse }))
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			}
 		}
 	};
 };
