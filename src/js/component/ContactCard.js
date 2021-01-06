@@ -51,20 +51,20 @@ export const ContactCard = props => {
 	);
 };
 
-/**
- * Define the data-types for
- * your component's properties
- **/
 ContactCard.propTypes = {
 	history: PropTypes.object,
-	onDelete: PropTypes.func,
-	propContact: PropTypes.object
+	//onDelete: PropTypes.func,
+	propContact: PropTypes.object,
+	id: PropTypes.string
 };
 
-/**
- * Define the default values for
- * your component's properties
- **/
 ContactCard.defaultProps = {
 	onDelete: null
 };
+
+/*<Link className="btn" to={"/edit/" + props.propContact.id}>
+							<i className="fas fa-pencil-alt mr-3" />
+						</Link>*/
+/*<button className="btn" onClick={() => props.history.push(`/edit/${props.propContact.id}`)}>
+							<i className="fas fa-pencil-alt mr-3" />
+						</button>*/

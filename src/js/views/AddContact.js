@@ -62,12 +62,16 @@ export const AddContact = () => {
 							name="address"
 						/>
 					</div>
-					<button
-						type="button"
-						className="btn btn-primary form-control"
-						onClick={() => actions.addContact(contact.name, contact.address, contact.email, contact.phone)}>
-						Add
-					</button>
+					<Link to="/">
+						<button
+							type="button"
+							className="btn btn-primary form-control"
+							onClick={() =>
+								actions.addContact(contact.name, contact.address, contact.email, contact.phone)
+							}>
+							Add
+						</button>
+					</Link>
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>

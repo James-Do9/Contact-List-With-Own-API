@@ -69,14 +69,22 @@ export const EditContact = props => {
 							name="address"
 						/>
 					</div>
-					<button
-						type="button"
-						className="btn btn-primary form-control"
-						onClick={() =>
-							actions.saveContact(contact.name, contact.address, contact.email, contact.phone, contact.id)
-						}>
-						Save
-					</button>
+					<Link to="/">
+						<button
+							type="button"
+							className="btn btn-primary form-control"
+							onClick={() =>
+								actions.saveContact(
+									contact.name,
+									contact.address,
+									contact.email,
+									contact.phone,
+									contact.id
+								)
+							}>
+							Save
+						</button>
+					</Link>
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>
