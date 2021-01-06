@@ -6,9 +6,7 @@ import MikePhoto from "../../img/m101.jpg";
 
 export const ContactCard = props => {
 	const { store, actions } = useContext(GlobalState);
-	const [state, setState] = useState({
-		//initialize state here
-	});
+	const [state, setState] = useState({});
 
 	return (
 		<li className="list-group-item">
@@ -50,20 +48,19 @@ export const ContactCard = props => {
 		</li>
 	);
 };
-
+//Passed props in order to display information given from Contacts.js such as name, address, phone, email, and ID. ID was very important in order to pass it as a parameter in
+//the onDelete function. Refer to flux.js on how onDelete() works.
 ContactCard.propTypes = {
 	history: PropTypes.object,
 	propContact: PropTypes.object,
-	id: PropTypes.string
+	id: PropTypes.string,
+	onDelete: PropTypes.func
 };
 
 ContactCard.defaultProps = {
 	onDelete: null
 };
 
-/*<Link className="btn" to={"/edit/" + props.propContact.id}>
-							<i className="fas fa-pencil-alt mr-3" />
-						</Link>*/
 /*<button className="btn" onClick={() => props.history.push(`/edit/${props.propContact.id}`)}>
-							<i className="fas fa-pencil-alt mr-3" />
-						</button>*/
+		<i className="fas fa-pencil-alt mr-3" />
+</button>*/

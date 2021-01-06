@@ -18,7 +18,8 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 
-			addContact: (fullname, address, email, phone) => { //Takes the information from the addContact.js and creates a new object with information in them.
+			addContact: (fullname, address, email, phone) => {
+				//Takes the information from the addContact.js and creates a new object with information in them.
 				fetch("https://assets.breatheco.de/apis/fake/contact/", {
 					method: "POST", //The information is then posted onto the API through the post method.
 					body: JSON.stringify({
@@ -57,8 +58,10 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 
-			onDelete: id => { //An ID is sent from the ContactCard.js file as a parameter.
-				fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, { //It then fetches the information at said ID.
+			onDelete: id => {
+				//An ID is sent from the ContactCard.js file as a parameter.
+				fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+					//It then fetches the information at said ID.
 					method: "DELETE", //The object inside the specific ID is then deleted with the DELETE method.
 					headers: {
 						"Content-Type": "application/json"
@@ -83,8 +86,10 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 
-			saveContact: (name, address, email, phone, id) => { //Takes the information from the EditContact.js and allows the user to edit the information.
-				fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, { //Fetches the information at the specific ID.
+			saveContact: (name, address, email, phone, id) => {
+				//Takes the information from the EditContact.js and allows the user to edit the information.
+				fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+					//Fetches the information at the specific ID.
 					method: "PUT", //Method specified by the API, changes the information based on what is based through the parameters.
 					body: JSON.stringify({
 						agenda_slug: "James",

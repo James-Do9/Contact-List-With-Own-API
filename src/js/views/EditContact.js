@@ -6,14 +6,15 @@ import PropTypes from "prop-types";
 
 export const EditContact = props => {
 	const { store, actions } = useContext(GlobalState);
-	const info = store.agenda.find(element => element.id == props.match.params.id);
+	const info = store.agenda.find(element => element.id == props.match.params.id); //VERY IMPORTANT, it gathers the information from the object at store.agenda if the element.id
+	//is the same as the props.match.params.id, ask George about this tomorrow.
 	console.log(info);
 	const [contact, setContact] = useState({
-		name: info ? info.full_name : null,
-		email: info ? info.email : null,
-		phone: info ? info.phone : null,
-		address: info ? info.address : null,
-		id: info ? info.id : null
+		name: info.full_name,
+		email: info.email,
+		phone: info.phone,
+		address: info.address,
+		id: info.id
 	});
 
 	const handleChange = e => {
@@ -96,11 +97,5 @@ export const EditContact = props => {
 EditContact.propTypes = {
 	match: PropTypes.object
 };
-/*{
-	store.agenda
-		? store.agenda.map((contact, index) => {
-				return contact.full_name;
-		  })
-		: null;
-}*/
+
 //Look up spreading later on

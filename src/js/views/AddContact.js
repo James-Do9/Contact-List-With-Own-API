@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 export const AddContact = () => {
 	const { store, actions } = useContext(GlobalState);
 	const [contact, setContact] = useState({
-		name: "",
+		name: "", //All must be empty because the user is inputting information
 		email: "",
 		phone: "",
 		address: ""
 	});
 	const handleChange = e => {
-        setContact({ ...contact, [e.target.name]: e.target.value }); //[e.target.name] changes to the name of the state and it is changed with the values at the state
-        //the use of the name attribute is important in the input fields in order for this to work along with the value.
+		setContact({ ...contact, [e.target.name]: e.target.value }); //[e.target.name] changes to the name of the state and it is changed with the values at the state
+		//the use of the name attribute is important in the input fields in order for this to work along with the value.
 	};
 	return (
 		<div className="container">

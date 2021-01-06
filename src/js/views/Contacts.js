@@ -22,6 +22,8 @@ export const Contacts = () => {
 					<ul className="list-group pull-down" id="contact-list">
 						{store.agenda
 							? store.agenda.map((contact, index) => {
+									//Maps through the agenda in store at flux.js, looks at each content at every index, and displays a ContactCard
+									//with information at that specific key.
 									return (
 										<ContactCard
 											key={index}
