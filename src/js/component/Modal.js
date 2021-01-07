@@ -30,14 +30,17 @@ export const Modal = props => {
 						<p>Warning: unknown consequences after this point... Kidding!</p>
 					</div>
 					<div className="modal-footer">
-						<button type="button" className="btn btn-primary">
+						<button type="button" className="btn btn-primary" onClick={() => props.onClose()}>
 							Oh no!
 						</button>
 						<button
 							type="button"
 							className="btn btn-secondary"
 							data-dismiss="modal"
-							onClick={() => actions.onDelete(info.id)}>
+							onClick={() => {
+								actions.onDelete(props.id);
+								props.onClose();
+							}}>
 							Do it!
 						</button>
 					</div>
@@ -50,7 +53,8 @@ export const Modal = props => {
 Modal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
-	show: PropTypes.bool
+	show: PropTypes.bool,
+	id: PropTypes.string
 	//match: PropTypes.object
 };
 
