@@ -15,7 +15,7 @@ export const AddContact = () => {
 		//the use of the name attribute is important in the input fields in order for this to work along with the value.
 	};
 	return (
-		<div className="container">
+		<div className="container text-white">
 			<div>
 				<h1 className="text-center mt-5">Add a new contact</h1>
 				<form>

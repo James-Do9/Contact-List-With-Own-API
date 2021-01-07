@@ -22,7 +22,7 @@ export const EditContact = props => {
 	};
 
 	return (
-		<div className="container">
+		<div className="container text-light">
 			<div>
 				<h1 className="text-center mt-5">Edit Contact</h1>
 				<form>

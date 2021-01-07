@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 export const Modal = props => {
 	const { store, actions } = useContext(GlobalState);
-	//const info = store.agenda.find(element => element.id == props.match.params.id);
 	const [state, setState] = useState({});
 	return (
 		<div className="modal" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
@@ -31,7 +30,7 @@ export const Modal = props => {
 					</div>
 					<div className="modal-footer">
 						<button type="button" className="btn btn-primary" onClick={() => props.onClose()}>
-							Oh no!
+							CANCEL
 						</button>
 						<button
 							type="button"
@@ -41,7 +40,7 @@ export const Modal = props => {
 								actions.onDelete(props.id);
 								props.onClose();
 							}}>
-							Do it!
+							DELETE
 						</button>
 					</div>
 				</div>
