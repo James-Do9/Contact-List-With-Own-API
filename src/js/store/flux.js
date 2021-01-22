@@ -5,7 +5,7 @@ const getState = ({ getStore, setStore }) => {
 		},
 		actions: {
 			loadInitialData: () => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James") //Fetches data from the api.
+				fetch("https://3000-d102b70d-22e9-4b1e-9f66-0b69eec53558.ws-us03.gitpod.io/contact/all") //Fetches data from the api.
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
@@ -20,10 +20,10 @@ const getState = ({ getStore, setStore }) => {
 
 			addContact: (fullname, address, email, phone) => {
 				//Takes the information from the addContact.js and creates a new object with information in them.
-				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+				fetch("https://3000-d102b70d-22e9-4b1e-9f66-0b69eec53558.ws-us03.gitpod.io/contact", {
 					method: "POST", //The information is then posted onto the API through the post method.
 					body: JSON.stringify({
-						agenda_slug: "James",
+						// agenda_slug: "James",
 						full_name: fullname,
 						email: email,
 						phone: phone,
@@ -41,7 +41,7 @@ const getState = ({ getStore, setStore }) => {
 					})
 					.then(jsonifiedResponse => {
 						console.log(jsonifiedResponse);
-						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James") //Second fetch goes through in order to update the Contact.js file and display additional cards.
+						fetch("https://3000-d102b70d-22e9-4b1e-9f66-0b69eec53558.ws-us03.gitpod.io/contact/all") //Second fetch goes through in order to update the Contact.js file and display additional cards.
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
@@ -60,7 +60,7 @@ const getState = ({ getStore, setStore }) => {
 
 			onDelete: id => {
 				//An ID is sent from the ContactCard.js file as a parameter.
-				fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+				fetch(`https://3000-d102b70d-22e9-4b1e-9f66-0b69eec53558.ws-us03.gitpod.io/contact/${id}`, {
 					//It then fetches the information at said ID.
 					method: "DELETE", //The object inside the specific ID is then deleted with the DELETE method.
 					headers: {
@@ -69,7 +69,7 @@ const getState = ({ getStore, setStore }) => {
 				})
 					.then(jsonifiedResponse => {
 						console.log(jsonifiedResponse);
-						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James") //Second fetch goes through in order to update the Contact.js file and display additional cards.
+						fetch("https://3000-d102b70d-22e9-4b1e-9f66-0b69eec53558.ws-us03.gitpod.io/contact/all") //Second fetch goes through in order to update the Contact.js file and display additional cards.
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
@@ -88,11 +88,11 @@ const getState = ({ getStore, setStore }) => {
 
 			saveContact: (name, address, email, phone, id) => {
 				//Takes the information from the EditContact.js and allows the user to edit the information.
-				fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+				fetch(`https://3000-d102b70d-22e9-4b1e-9f66-0b69eec53558.ws-us03.gitpod.io/contact/${id}`, {
 					//Fetches the information at the specific ID.
 					method: "PUT", //Method specified by the API, changes the information based on what is based through the parameters.
 					body: JSON.stringify({
-						agenda_slug: "James",
+						// agenda_slug: "James",
 						full_name: name,
 						email: email,
 						address: address,
@@ -110,7 +110,7 @@ const getState = ({ getStore, setStore }) => {
 					})
 					.then(jsonifiedResponse => {
 						console.log(jsonifiedResponse);
-						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/James") //Sets the agenda to the array with objects.
+						fetch("https://3000-d102b70d-22e9-4b1e-9f66-0b69eec53558.ws-us03.gitpod.io/contact/all") //Sets the agenda to the array with objects.
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
